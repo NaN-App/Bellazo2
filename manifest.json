@@ -47,7 +47,7 @@
       "name": "Adicionar Transação",
       "short_name": "Adicionar",
       "description": "Adicione uma nova transação rapidamente",
-      "url": "/?page=1",
+      "url": "./index.html?page=1",
       "icons": [
         {
           "src": "bellazo_icon.png",
