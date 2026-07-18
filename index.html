@@ -40,6 +40,8 @@
             margin: 0;
             padding: 0;
             font-family: 'Cabin', -apple-system, BlinkMacSystemFont, sans-serif;
+            outline: none;  
+    -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
@@ -55,9 +57,10 @@
         /* --- ESTRUTURA FIXA SUPERIOR --- */
         .fixed-top-container {
             flex-shrink: 0;
-            background-color: #014a4d;
+            background-color: var(--primary);
             padding: 20px 16px 20px 16px;
             z-index: 10;
+            border: 1px solid #014a4d;
             border-radius: 0 0 30px 30px;
             box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
         }
@@ -76,12 +79,13 @@
             letter-spacing: -0.3px;
         }
 
+        /* --- TRIO DE BOTÕES FLUTUANTES REORGANIZADOS --- */
         .sync-icon-btn {
             position: fixed;
             bottom: 30px;
             left: 30px;
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background-color: var(--primary); 
             border: none;
@@ -98,6 +102,96 @@
             transform: scale(0.92);
         }
 
+        .fab-add-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #006080;
+            color: white;
+            border: none;
+            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1500;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fab-add-btn:active {
+            transform: translateX(-50%) scale(0.92);
+        }
+
+        .theme-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary); 
+            border: none;
+            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1500;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* --- IMPLEMENTAÇÃO DARK MODE --- */
+        body.dark-mode {
+            --background: #010107;
+            --card-bg: #10222f;
+            --text-secondary: #b0b3b8;
+            --border-color: #333333;
+            --primary: #001820;
+            --accent: #001820;
+        }
+
+        body.dark-mode,
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode .custom-input-wrapper .field-label,
+        body.dark-mode .t-main-description,
+        body.dark-mode .t-date-day,
+        body.dark-mode .modal-header h2,
+        body.dark-mode .transactions-header h3,
+        body.dark-mode .confirmation-item,
+        body.dark-mode .date-filter-wrapper .date-label {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode select option {
+            background-color: #1e1e1e !important;
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .fixed-top-container,
+        body.dark-mode .card,
+        body.dark-mode .wizard-card,
+        body.dark-mode .modal-card,
+        body.dark-mode .history-controls {
+        border-color: #3a3b3c;
+        }
+
+        body.dark-mode .t-item-card:active {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode .t-card-right {
+    color: #ffffff !important;
+}
+
         /* --- MODAL DO WIZARD (POSICIONADO NO TOPO PARA O TECLADO) --- */
         .wizard-overlay {
             position: fixed;
@@ -107,10 +201,10 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 5000;
             display: none;
-            align-items: flex-start; /* Fixa o alinhamento no topo */
+            align-items: flex-start;
             justify-content: center;
             padding: 160px 16px 24px 16px;
             overflow-y: auto;
@@ -166,7 +260,6 @@
             min-width: 0;
         }
 
-        /* Botões de navegação interna do Wizard */
         .wizard-actions {
             display: flex;
             gap: 10px;
@@ -206,7 +299,6 @@
             color: white;
         }
 
-        /* Caixa de confirmação final */
         .confirmation-box {
             background-color: var(--background);
             padding: 14px;
@@ -271,7 +363,7 @@
 
         .container {
             max-width: 600px;
-            margin: 0-- auto;
+            margin: 0 auto;
             width: 100%;
         }
 
@@ -303,7 +395,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 2000;
             display: none;
             align-items: flex-start;
@@ -411,15 +503,15 @@
         .card.balance {
             background: var(--primary);
             color: #dddddd;
-            box-shadow: 0px 8px 10px rgba(26, 60, 56, 0.5);
-            border: none;
+            box-shadow: 0px 8px 10px rgba(0, 10, 0, 0.5);
+            border: 1px solid #014a4d;
         }
         
         .card.balance h3 { color: #ffffff; }
         .card.balance p { color: var(--verde) !important; }
 
         .card h3 {
-            font-size: 25px;
+            font-size: 20px;
             text-transform: uppercase;
             color: var(--text-secondary);
             margin-bottom: 4px;
@@ -520,30 +612,6 @@
             align-items: center;
             justify-content: center;
             height: 50px;
-        }
-
-        /* --- BOTÃO FLUTUANTE REAL (FAB) --- */
-        .fab-add-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: #559955;
-            color: white;
-            border: none;
-            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1500;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .fab-add-btn:active {
-            transform: scale(0.92);
         }
 
         /* --- HISTÓRICO --- */
@@ -658,7 +726,7 @@
             margin-top: 5px;
         }
 
-        .t-item-card {
+     .t-item-card {
             background: var(--card-bg);
             border-radius: 25px; 
             padding: 10px 20px;
@@ -726,7 +794,7 @@
             background-color: transparent !important; 
         }
 
-      .t-info-block {
+        .t-info-block {
             display: flex;
             flex-direction: column;
             min-width: 0;
@@ -793,7 +861,7 @@
 </head>
 <body>
 
-    <!-- CABEÇALHO FIXO NO TOPO -->
+   <!-- CABEÇALHO FIXO NO TOPO (ORIGINAL) -->
     <div class="fixed-top-container">
         <header>
             <h1>BellaZô Finanças</h1>                        
@@ -842,7 +910,7 @@
                         <div class="custom-input-wrapper flex-1" id="category-wrapper-step">
                             <span id="form-category-label" class="field-label">Categoria</span>
                             <span class="field-arrow">▼</span>
-                            <select <select id="category" onchange="updateFormCategoryLabel()"></select>
+                            <select id="category" onchange="updateFormCategoryLabel()"></select>
                         </div>
                         <div class="custom-input-wrapper flex-1">
                             <span id="form-date-label" class="field-label">Data</span>
@@ -877,18 +945,21 @@
             </form>
         </div>
     </div>
-
-    <!-- BOTÃO FLUTUANTE DE SINCRONIZAÇÃO (CANTO INFERIOR ESQUERDO) -->
+    <!-- TRIO DE BOTÕES FLUTUANTES INFERIORES NATIVOS (FORA DO WIZARD) -->
+    
+    <!-- 1. Botão Sync (Esquerda) -->
     <button class="sync-icon-btn" id="menu-toggle-btn" onclick="toggleModal()" title="Sincronizar">
-        <svg viewBox="-2.4 -2.4 28.80 28.80" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.6807 14.5869C19.1708 14.5869 22 11.7692 22 8.29344C22 4.81767 19.1708 2 15.6807 2C12.1907 2 9.3615 4.81767 9.3615 8.29344C9.3615 9.90338 10.0963 11.0743 10.0963 11.0743L2.45441 18.6849C2.1115 19.0264 1.63143 19.9143 2.45441 20.7339L3.33616 21.6121C3.67905 21.9048 4.54119 22.3146 5.2466 21.6121L6.27531 20.5876C7.30403 21.6121 8.4797 21.0267 8.92058 20.4412C9.65538 19.4167 8.77362 18.3922 8.77362 18.3922L9.06754 18.0995C10.4783 19.5045 11.7128 18.6849 12.1537 18.0995C12.8885 17.075 12.1537 16.0505 12.1537 16.0505C11.8598 15.465 11.272 15.465 12.0067 14.7333L12.8885 13.8551C13.5939 14.4405 15.0439 14.5869 15.6807 14.5869Z" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"></path> <path d="M17.8853 8.29353C17.8853 9.50601 16.8984 10.4889 15.681 10.4889C14.4635 10.4889 13.4766 9.50601 13.4766 8.29353C13.4766 7.08105 14.4635 6.09814 15.681 6.09814C16.8984 6.09814 17.8853 7.08105 17.8853 8.29353Z" stroke="#ffffff" stroke-width="1.5"></path> </g></svg>
+        <svg viewBox="-2.4 -2.4 28.80 28.80" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.6807 14.5869C19.1708 14.5869 22 11.7692 22 8.29344C22 4.81767 19.1708 2 15.6807 2C12.1907 2 9.3615 4.81767 9.3615 8.29344C9.3615 9.90338 10.0963 11.0743 10.0963 11.0743L2.45441 18.6849C2.1115 19.0264 1.63143 19.9143 2.45441 20.7339L3.33616 21.6121C3.67905 21.9048 4.54119 22.3146 5.2466 21.6121L6.27531 20.5876C7.30403 21.6121 8.4797 21.0267 8.92058 20.4412C9.65538 19.4167 8.77362 18.3922 8.77362 18.3922L9.06754 18.0995C10.4783 19.5045 11.7128 18.6849 12.1537 18.0995C12.8885 17.075 12.1537 16.0505 12.1537 16.0505C11.8598 15.465 11.272 15.465 12.0067 14.7333L12.8885 13.8551C13.5939 14.4405 15.0439 14.5869 15.6807 14.5869Z" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"></path><path d="M17.8853 8.29353C17.8853 9.50601 16.8984 10.4889 15.681 10.4889C14.4635 10.4889 13.4766 9.50601 13.4766 8.29353C13.4766 7.08105 14.4635 6.09814 15.681 6.09814C16.8984 6.09814 17.8853 7.08105 17.8853 8.29353Z" stroke="#ffffff" stroke-width="1.5"></path></svg>
     </button>
 
-    <!-- BOTÃO FLUTUANTE DE AÇÃO (FAB) -->
+    <!-- 2. Botão Adicionar (Centro) -->
     <button type="button" id="fab-open-wizard" class="fab-add-btn" onclick="openWizardModal()" title="Nova Transação">
-        <svg viewBox="0 0 24 24" width="35" height="35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
+        <svg viewBox="0 0 24 24" width="35" height="35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    </button>
+
+    <!-- 3. Botão Modo Claro/Escuro (Direita) -->
+    <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" onclick="toggleTheme()" title="Mudar Tema">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
     </button>
 
     <!-- MODAL DE SINCRONIZAÇÃO -->
@@ -1061,7 +1132,6 @@
             document.getElementById('app-viewport').scrollTo({ left: 0, behavior: 'smooth' });
         }
 
-        // GERENCIAMENTO DA EXIBIÇÃO DO POP-UP DO WIZARD
         function openWizardModal() {
             if (!editingTransactionId) {
                 form.reset();
@@ -1094,7 +1164,6 @@
                 catWrapper.style.display = 'flex';
             }
 
-            // Popula os dados na tela de Confirmação (Passo 4)
             if (currentWizardStep === 4) {
                 const isIncome = typeInput.value === 'income';
                 document.getElementById('conf-type').textContent = isIncome ? 'Receita' : 'Despesa';
@@ -1122,7 +1191,6 @@
                 }
             }
         }
-
         function nextWizardStep() {
             if (currentWizardStep === 1) {
                 if (!amountInput.value || parseFloat(amountInput.value) <= 0) {
@@ -1231,6 +1299,7 @@
             actionTitle.textContent = `Lançamento: "${description}"`;
             toggleActionModal();
         }
+        
         function triggerCardEdit() {
             toggleActionModal();
             if (activeCardId) editTransaction(activeCardId);
@@ -1261,8 +1330,9 @@
             updateFormTypeLabel();
             updateFormCategoryLabel();
             updateWizardUI();
-            }
-            function populateCategoryFilter() {
+        }
+        
+        function populateCategoryFilter() {
             const filterCat = document.getElementById('filter-cat');
             const currentSelection = filterCat.value;
             filterCat.innerHTML = '<option value="">Categoria</option>';
@@ -1459,7 +1529,6 @@
             updateFormTypeLabel();
             updateFormCategoryLabel();
             
-            // Abre o pop-up com as informações carregadas para edição
             openWizardModal();
             scrollToPageOne();
         }
@@ -1496,27 +1565,69 @@
             populateCategoryFilter();
             init();
         }
-        // Monitora o deslize das páginas para esconder os botões no Histórico
-document.getElementById('app-viewport').addEventListener('scroll', function(e) {
-    const scrollLeft = e.target.scrollLeft;
-    const viewWidth = e.target.clientWidth;
-    const syncBtn = document.getElementById('menu-toggle-btn');
-    const fabBtn = document.getElementById('fab-open-wizard');
 
-    // Se o usuário arrastou mais da metade da largura da tela em direção ao histórico
-    if (scrollLeft > viewWidth / 2) {
-        syncBtn.style.opacity = '0';
-        syncBtn.style.pointerEvents = 'none'; // Desativa o clique enquanto invisível
-        fabBtn.style.opacity = '0';
-        fabBtn.style.pointerEvents = 'none';
-    } else {
-        syncBtn.style.opacity = '1';
-        syncBtn.style.pointerEvents = 'auto'; // Reativa o clique
-        fabBtn.style.opacity = '1';
-        fabBtn.style.pointerEvents = 'auto';
+        // SVGS DOS DOIS MODOS DE TEMA
+        const sunSVG = `<svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.22" x2="5.64" y2="17.78"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonSVG = `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+        // FUNÇÃO PARA ALTERNAR O TEMA
+        function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    document.getElementById('theme-toggle-btn').innerHTML = isDark ? sunSVG : moonSVG;
+
+    // 👇 ALTERA O THEME-COLOR DINAMICAMENTE 👇
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+        // Altera para #121212 no modo escuro e volta para #014a4d no modo claro
+        metaThemeColor.setAttribute('content', isDark ? '#001820' : '#014a4d');
     }
-});
+}
 
+         // VERIFICAÇÃO DE TEMA AO INICIAR O APP
+(function() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('theme-toggle-btn').innerHTML = sunSVG;
+            
+            // 👇 GARANTE A COR CORRETA AO CARREGAR A PÁGINA 👇
+            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+            if (metaThemeColor) {
+                metaThemeColor.setAttribute('content', '#001820');
+            }
+        });
+    }
+})();
+
+
+        // CONTROLADOR DE SCROLL ATUALIZADO (Esconde os 3 botões no Histórico de forma unificada)
+        document.getElementById('app-viewport').addEventListener('scroll', function(e) {
+            const scrollLeft = e.target.scrollLeft;
+            const viewWidth = e.target.clientWidth;
+            const syncBtn = document.getElementById('menu-toggle-btn');
+            const fabBtn = document.getElementById('fab-open-wizard');
+            const themeBtn = document.getElementById('theme-toggle-btn');
+
+            if (scrollLeft > viewWidth / 2) {
+                syncBtn.style.opacity = '0';
+                syncBtn.style.pointerEvents = 'none';
+                fabBtn.style.opacity = '0';
+                fabBtn.style.pointerEvents = 'none';
+                themeBtn.style.opacity = '0';
+                themeBtn.style.pointerEvents = 'none';
+            } else {
+                syncBtn.style.opacity = '1';
+                syncBtn.style.pointerEvents = 'auto';
+                fabBtn.style.opacity = '1';
+                fabBtn.style.pointerEvents = 'auto';
+                themeBtn.style.opacity = '1';
+                themeBtn.style.pointerEvents = 'auto';
+            }
+        });
     </script>
 </body>
 </html>
