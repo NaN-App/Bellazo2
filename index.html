@@ -24,8 +24,8 @@
     
     <style>
         :root {
-            --primary: #014a4d;       
-            --accent: #014a4d;        
+            --primary: #014a60;       
+            --accent: #014a5d;        
             --verde: #F7f7f7;         
             --income: #208E10;        
             --expense: #CA1A1A;       
@@ -58,12 +58,12 @@
         .fixed-top-container {
             flex-shrink: 0;
             background-color: var(--primary);
-            padding: 20px 16px 20px 16px;
+            padding: 10px 16px 10px 16px;
             z-index: 10;
             border-right: 1px solid #014a4d;
             border-bottom: 1px solid #014a4d;
             border-left: 1px solid #014a4d;
-            border-radius: 0 0 30px 30px;
+            border-radius: 0 0 25px 25px;
             box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
         }
 
@@ -71,7 +71,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px 4px 20px 4px;
+            padding: 10px 4px 10px 4px;
         }
 
         header h1 {
@@ -84,8 +84,8 @@
         /* --- TRIO DE BOTÕES FLUTUANTES REORGANIZADOS --- */
         .sync-icon-btn {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 15px;
+            left: 20px;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -97,7 +97,7 @@
             justify-content: center;
             cursor: pointer;
             z-index: 1500;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .sync-icon-btn:active {
@@ -106,11 +106,11 @@
 
         .fab-add-btn {
             position: fixed;
-            bottom: 30px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background-color: #006080;
             color: white;
@@ -121,7 +121,7 @@
             justify-content: center;
             cursor: pointer;
             z-index: 1500;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .fab-add-btn:active {
@@ -130,8 +130,8 @@
 
         .theme-toggle-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 15px;
+            right: 20px;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -143,7 +143,7 @@
             justify-content: center;
             cursor: pointer;
             z-index: 1500;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .theme-toggle-btn:active {
@@ -155,7 +155,7 @@
             --background: #010107;
             --card-bg: #10222f;
             --text-secondary: #b0b3b8;
-            --border-color: #333333;
+            --border-color: #555555;
             --primary: #001820;
             --accent: #001820;
         }
@@ -495,7 +495,7 @@
 
         .card {
             background: var(--card-bg);
-            padding: 30px 24px;
+            padding: 25px 24px;
             border-radius: 30px;
             box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.5);
             text-align: left;
@@ -522,7 +522,7 @@
         }
 
         .card p {
-            font-size: 40px;
+            font-size: 38px;
             font-weight: 500;
             letter-spacing: -0.1px;
         }
@@ -615,6 +615,95 @@
             justify-content: center;
             height: 50px;
         }
+        
+        /* --- CONTADOR DE FECHAMENTO --- */
+.countdown-card {
+    background-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0px 8px 10px rgba(26, 60, 56, 0.4);
+    border: none;
+    padding: 20px 20px;
+}
+
+.countdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.countdown-header h3 {
+    color: #ffffff;
+    font-size: 15px;
+    margin: 0;
+}
+
+.countdown-settings {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    color: var(--border-color);
+}
+
+.countdown-settings input {
+    width: 45px;
+    height: 28px;
+    padding: 0 4px;
+    text-align: center;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.countdown-settings input:focus {
+    border-color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.25); /* Fundo escuro estilo flip-clock */
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 40px;
+}
+
+.time-box span {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+.time-box small {
+    font-size: 10px;
+    margin-top: 4px;
+    opacity: 0.7;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.colon {
+    font-size: 24px;
+    font-weight: 700;
+    opacity: 0.4;
+    margin-bottom: 12px; /* Alinha visualmente com os números */
+}
+
 
         /* --- HISTÓRICO --- */
         .history-wrapper {
@@ -1013,17 +1102,47 @@
                             <h3>Receitas</h3>
                             <p id="income-display">R$ 0,00</p>
                         </div>
-                        <div class="card expense">
-                            <h3>Despesas</h3>
-                            <p id="expense-display">R$ 0,00</p>
-                        </div>
-                    </div>
+                       
+                  <div class="card expense">
+                     <h3>Despesas</h3>
+                          <p id="expense-display">R$ 0,00</p>
+</div>
 
-                    <div class="page-indicator-bar">
-                        <div class="indicator-dot active"></div>
-                        <div class="indicator-dot"></div>
+<!-- NOVO CARD: CONTADOR DE FECHAMENTO -->
+<div class="card countdown-card">
+    <div class="countdown-header" style="padding: 0 8px">
+        <h3>Tempo Restante</h3>
+        <div class="countdown-settings">
+            <label for="closing-day">DATA:</label>
+            <input type="number" id="closing-day" value="20" min="1" max="31" onchange="updateClosingDay(this.value)" title="Definir dia de fechamento">
+        </div>
+    </div>
+    <div class="countdown-timer">
+        <div class="time-box">
+            <span id="cd-days">00</span>
+            <small>DIAS</small>
+        </div>
+        <span class="colon">:</span>
+        <div class="time-box">
+            <span id="cd-hours">00</span>
+            <small>HORAS</small>
+        </div>
+        <span class="colon">:</span>
+        <div class="time-box">
+            <span id="cd-minutes">00</span>
+            <small>MIN</small>
+        </div>
+        <span class="colon">:</span>
+        <div class="time-box">
+            <span id="cd-seconds">00</span>
+            <small>SEG</small>
+        </div>
+    </div>
+</div>
+</div>
+
                     </div>
-                </div>
+         
             </div>
 
             <!-- PÁGINA 2: HISTÓRICO DE TRANSAÇÕES -->
@@ -1040,7 +1159,7 @@
                             <input type="text" id="filter-desc" placeholder="Pesquisar" oninput="init()">
                             
                             <div class="date-filter-wrapper">
-                                <span id="filter-date-label" class="date-label placeholder">Data</span>
+                                <span id="filter-date-label" class="date-label placeholder">Data</span>a
                                 <span class="date-arrow">▼</span>
                                 <input type="date" id="filter-date" onchange="updateFilterDateLabel(this)">
                             </div>
@@ -1085,7 +1204,7 @@
           measurementId: "G-3VHZQCHGBJ"
         };
 
-        const expenseCategories = ["Casa", "Saúde", "Carro", "Meninas", "Alimentação", "Mercado", "Manutenção", "Lazer", "Viagem", "Conforto", "JW", "Estética", "Outros"];
+        const expenseCategories = ["Alimentação", "Carro", "Casa", "Saúde", "Meninas", "Mercado", "Manutenção", "Lazer", "Viagem", "Conforto", "JW", "Estética", "Outros"];
 
         const categoryMetadata = {
             "Alimentação": { icon: "🍲", bg: "#E6A185" }, 
@@ -1133,6 +1252,60 @@
         function scrollToPageOne() {
             document.getElementById('app-viewport').scrollTo({ left: 0, behavior: 'smooth' });
         }
+        
+        /* --- LÓGICA DO CONTADOR DE FECHAMENTO --- */
+let closingDay = localStorage.getItem('closing_day') || 20;
+document.getElementById('closing-day').value = closingDay;
+
+function updateClosingDay(val) {
+    let day = parseInt(val);
+    if(day >= 1 && day <= 31) {
+        closingDay = day;
+        localStorage.setItem('closing_day', closingDay);
+        calculateCountdown(); // Atualiza na mesma hora
+    } else {
+        // Volta para o último valor válido se o usuário digitar algo estranho
+        document.getElementById('closing-day').value = closingDay; 
+    }
+}
+
+function calculateCountdown() {
+    const now = new Date();
+    // Cria a data alvo para o dia de fechamento definido
+    let target = new Date(now.getFullYear(), now.getMonth(), closingDay);
+    target.setHours(23, 59, 59, 999);
+
+    // Se hoje já passou do dia estipulado (ex: hoje é dia 22 e fecha dia 20)
+    // O alvo vira o dia de fechamento do próximo mês
+    if (now.getDate() > closingDay) {
+        target.setMonth(target.getMonth() + 1);
+    }
+
+    const diff = target - now;
+
+    if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+    } else {
+        // Previne bugar se cair no exato milissegundo zero
+        document.getElementById('cd-days').textContent = "00";
+        document.getElementById('cd-hours').textContent = "00";
+        document.getElementById('cd-minutes').textContent = "00";
+        document.getElementById('cd-seconds').textContent = "00";
+    }
+}
+
+// Atualiza o contador a cada 1 segundo (1000ms)
+setInterval(calculateCountdown, 1000);
+calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de aparecer
+
 
         function openWizardModal() {
             if (!editingTransactionId) {
