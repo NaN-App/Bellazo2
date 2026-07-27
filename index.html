@@ -494,8 +494,8 @@
         }
 
         .card {
-            background: var(--card-bg);
-            padding: 25px 24px;
+            background: #fff;
+            padding: 30px 24px;
             border-radius: 30px;
             box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.5);
             text-align: left;
@@ -669,9 +669,12 @@
     justify-content: space-between;
     align-items: center;
     background: rgba(0, 0, 0, 0.25); /* Fundo escuro estilo flip-clock */
-    padding: 10px 20px;
+    padding: 10px 35px;
     border-radius: 25px;
     border: 1px solid rgba(255,255,255,0.1);
+    width: 100%;  
+    max-width: 320px;
+    margin: 0 auto;
 }
 
 .time-box {
@@ -1131,18 +1134,14 @@
         <div class="time-box">
             <span id="cd-minutes">00</span>
             <small>MIN</small>
-        </div>
-        <span class="colon">:</span>
-        <div class="time-box">
-            <span id="cd-seconds">00</span>
-            <small>SEG</small>
+        
         </div>
     </div>
 </div>
 </div>
 
                     </div>
-         
+                    
             </div>
 
             <!-- PÁGINA 2: HISTÓRICO DE TRANSAÇÕES -->
@@ -1273,7 +1272,7 @@ function calculateCountdown() {
     const now = new Date();
     // Cria a data alvo para o dia de fechamento definido
     let target = new Date(now.getFullYear(), now.getMonth(), closingDay);
-    target.setHours(23, 59, 59, 999);
+    target.setHours(23, 59, 59);
 
     // Se hoje já passou do dia estipulado (ex: hoje é dia 22 e fecha dia 20)
     // O alvo vira o dia de fechamento do próximo mês
@@ -1287,18 +1286,18 @@ function calculateCountdown() {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / 1000 / 60) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
+        
 
         document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
         document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
         document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
-        document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+        
     } else {
         // Previne bugar se cair no exato milissegundo zero
         document.getElementById('cd-days').textContent = "00";
         document.getElementById('cd-hours').textContent = "00";
         document.getElementById('cd-minutes').textContent = "00";
-        document.getElementById('cd-seconds').textContent = "00";
+        
     }
 }
 
