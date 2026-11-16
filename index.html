@@ -12,8 +12,8 @@
     
     <link class="favicon-png" rel="icon" type="image/png" sizes="192x192" href="1000320254.png">
     <link class="favicon-png" rel="icon" type="image/png" sizes="512x512" href="1000320254.png">
-    <link rel="manifest" href="manifest.json">
-    
+    <link class="manifest" href="manifest.json">
+
     <!-- Importação da Fonte Cabin -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,7 @@
             --verde: #F7f7f7;         
             --income: #208E10;        
             --expense: #CA1A1A;       
+            --installment: #D96B00;   
             --background: #F4F6F5;    
             --card-bg: #ffffff;
             --text-secondary: #333333; 
@@ -41,7 +42,7 @@
             padding: 0;
             font-family: 'Cabin', -apple-system, BlinkMacSystemFont, sans-serif;
             outline: none;  
-    -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
@@ -58,7 +59,7 @@
         .fixed-top-container {
             flex-shrink: 0;
             background-color: var(--primary);
-            padding: 10px 16px 10px 16px;
+            padding: 8px 16px;
             z-index: 10;
             border-right: 1px solid #014a4d;
             border-bottom: 1px solid #014a4d;
@@ -71,12 +72,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px 4px 10px 4px;
+            padding: 6px 4px;
         }
 
         header h1 {
             color: #ffffff;
-            font-size: 45px;
+            font-size: 38px;
             font-weight: 600;
             letter-spacing: -0.3px;
         }
@@ -183,7 +184,7 @@
         body.dark-mode .wizard-card,
         body.dark-mode .modal-card,
         body.dark-mode .history-controls {
-        border-color: #3a3b3c;
+            border-color: #3a3b3c;
         }
 
         body.dark-mode .t-item-card:active {
@@ -191,8 +192,8 @@
         }
         
         body.dark-mode .t-card-right {
-    color: #ffffff !important;
-}
+            color: #ffffff !important;
+        }
 
         /* --- MODAL DO WIZARD (POSICIONADO NO TOPO PARA O TECLADO) --- */
         .wizard-overlay {
@@ -208,7 +209,7 @@
             display: none;
             align-items: flex-start;
             justify-content: center;
-            padding: 160px 16px 24px 16px;
+            padding: 130px 16px 24px 16px;
             overflow-y: auto;
         }
 
@@ -260,6 +261,20 @@
         .flex-1 {
             flex: 1;
             min-width: 0;
+        }
+
+        .installment-preview-badge {
+            height: 50px;
+            border-radius: 20px;
+            border: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--installment);
+            padding: 0 12px;
+            white-space: nowrap;
         }
 
         .wizard-actions {
@@ -360,7 +375,7 @@
             scroll-snap-align: start;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 12px 13px 70px 13px;
+            padding: 10px 13px 85px 13px;
         }
 
         .container {
@@ -486,18 +501,18 @@
             text-align: center;
         }
 
-        /* --- DASHBOARD --- */
+        /* --- DASHBOARD COMPACTO PARA CABER TODOS OS CARDS --- */
         .dashboard {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .card {
             background: #fff;
-            padding: 30px 24px;
-            border-radius: 30px;
-            box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.5);
+            padding: 12px 22px;
+            border-radius: 24px;
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.35);
             text-align: left;
             border: 1px solid #E1E3E1; 
         }
@@ -505,7 +520,7 @@
         .card.balance {
             background: var(--primary);
             color: #dddddd;
-            box-shadow: 0px 8px 10px rgba(0, 10, 0, 0.5);
+            box-shadow: 0px 6px 8px rgba(0, 10, 0, 0.4);
             border: 1px solid #014a4d;
         }
         
@@ -513,22 +528,24 @@
         .card.balance p { color: var(--verde) !important; }
 
         .card h3 {
-            font-size: 20px;
+            font-size: 15px;
             text-transform: uppercase;
             color: var(--text-secondary);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             letter-spacing: 0.3px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .card p {
-            font-size: 38px;
-            font-weight: 500;
+            font-size: 28px;
+            font-weight: 600;
             letter-spacing: -0.1px;
+            line-height: 1.15;
         }
 
         .card.income p { color: var(--income); }
         .card.expense p { color: var(--expense); }
+        .card.installment p { color: var(--installment); }
 
         /* --- FORMS & WRAPPERS --- */
         .custom-input-wrapper {
@@ -565,16 +582,16 @@
 
         .custom-input-wrapper .field-label {
             color: var(--primary);
-            font-size: 18px;
+            font-size: 17px;
             user-select: none;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            padding-right: 12px;
+            padding-right: 8px;
         }
 
         .custom-input-wrapper .field-arrow {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-secondary);
             user-select: none;
         }
@@ -616,97 +633,96 @@
             height: 50px;
         }
         
-        /* --- CONTADOR DE FECHAMENTO --- */
-.countdown-card {
-    background-color: var(--primary);
-    color: #ffffff;
-    box-shadow: 0px 8px 10px rgba(26, 60, 56, 0.4);
-    border: none;
-    padding: 20px 20px;
-}
+        /* --- CONTADOR DE FECHAMENTO COMPACTO --- */
+        .countdown-card {
+            background-color: var(--primary);
+            color: #ffffff;
+            box-shadow: 0px 6px 8px rgba(26, 60, 56, 0.4);
+            border: none;
+            padding: 12px 18px;
+        }
 
-.countdown-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
+        .countdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
 
-.countdown-header h3 {
-    color: #ffffff;
-    font-size: 15px;
-    margin: 0;
-}
+        .countdown-header h3 {
+            color: #ffffff;
+            font-size: 14px;
+            margin: 0;
+        }
 
-.countdown-settings {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    color: var(--border-color);
-}
+        .countdown-settings {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--border-color);
+        }
 
-.countdown-settings input {
-    width: 45px;
-    height: 28px;
-    padding: 0 4px;
-    text-align: center;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
-    background-color: rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 16px;
-}
+        .countdown-settings input {
+            width: 42px;
+            height: 24px;
+            padding: 0 4px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
+        }
 
-.countdown-settings input:focus {
-    border-color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.4);
-}
+        .countdown-settings input:focus {
+            border-color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
 
-.countdown-timer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.25); /* Fundo escuro estilo flip-clock */
-    padding: 10px 35px;
-    border-radius: 25px;
-    border: 1px solid rgba(255,255,255,0.1);
-    width: 100%;  
-    max-width: 320px;
-    margin: 0 auto;
-}
+        .countdown-timer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 6px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%;  
+            max-width: 320px;
+            margin: 0 auto;
+        }
 
-.time-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 40px;
-}
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 36px;
+        }
 
-.time-box span {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: 1px;
-    color: #ffffff;
-}
+        .time-box span {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
 
-.time-box small {
-    font-size: 10px;
-    margin-top: 4px;
-    opacity: 0.7;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
+        .time-box small {
+            font-size: 9px;
+            margin-top: 2px;
+            opacity: 0.7;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
 
-.colon {
-    font-size: 24px;
-    font-weight: 700;
-    opacity: 0.4;
-    margin-bottom: 12px; /* Alinha visualmente com os números */
-}
-
+        .colon {
+            font-size: 20px;
+            font-weight: 700;
+            opacity: 0.4;
+            margin-bottom: 10px;
+        }
 
         /* --- HISTÓRICO --- */
         .history-wrapper {
@@ -820,7 +836,7 @@
             margin-top: 5px;
         }
 
-     .t-item-card {
+        .t-item-card {
             background: var(--card-bg);
             border-radius: 25px; 
             padding: 10px 20px;
@@ -855,6 +871,7 @@
         }
         .t-status-dot.income { background-color: var(--verde); }
         .t-status-dot.expense { background-color: var(--expense); }
+        .t-status-dot.installment { background-color: var(--installment); }
 
         .t-date-block {
             display: flex;
@@ -904,6 +921,9 @@
         .t-info-block-income .t-meta-category {
             color: var(--income);
         }
+        .t-info-block-installment .t-meta-category {
+            color: var(--installment);
+        }
         .t-main-description {
             font-size: 15px;
             font-weight: 700;
@@ -922,6 +942,7 @@
         }
         .t-card-right.income { color: var(--primary); } 
         .t-card-right.expense { color: #222222; }
+        .t-card-right.installment { color: var(--installment); }
 
         .action-menu-btn {
             padding: 14px;
@@ -955,19 +976,19 @@
 </head>
 <body>
 
-   <!-- CABEÇALHO FIXO NO TOPO (ORIGINAL) -->
+    <!-- CABEÇALHO FIXO NO TOPO -->
     <div class="fixed-top-container">
         <header>
             <h1>BellaZô Finanças</h1>                        
         </header>
     </div>
 
-    <!-- REVOLUCIONÁRIO: MODAL POP-UP DO WIZARD NO TOPO -->
+    <!-- MODAL POP-UP DO WIZARD -->
     <div class="wizard-overlay" id="wizard-modal" onclick="closeWizardModal(event)">
         <div class="wizard-card" onclick="event.stopPropagation()">
             <form id="transaction-form" onsubmit="event.preventDefault();">
                 
-                <!-- PASSO 1: TIPO E VALOR -->
+                <!-- PASSO 1: TIPO, VALOR E PARCELAS -->
                 <div class="wizard-step" data-step="1">
                     <div class="wizard-step-title">Passo 1: Tipo & Valor</div>
                     <div class="wizard-row">
@@ -977,10 +998,18 @@
                             <select id="type" onchange="handleTypeChange()">
                                 <option value="expense" selected>Despesa</option>
                                 <option value="income">Receita</option>
+                                <option value="installment">Compra Parcelada</option>
                             </select>
                         </div>
-                        <input type="number" id="amount" placeholder="Valor (R$)" step="0.01" required class="flex-1">
+                        <input type="number" id="amount" placeholder="Valor (R$)" step="0.01" required class="flex-1" oninput="updateInstallmentPreview()">
                     </div>
+
+                    <!-- Linha extra exibida apenas para Compra Parcelada -->
+                    <div class="wizard-row" id="installment-row" style="display: none;">
+                        <input type="number" id="installments" placeholder="Nº Parcelas (ex: 10)" min="2" max="120" step="1" class="flex-1" oninput="updateInstallmentPreview()">
+                        <div class="installment-preview-badge flex-1" id="installment-preview">0x de R$ 0,00</div>
+                    </div>
+
                     <div class="wizard-actions">
                         <button type="button" class="btn-wizard secondary" onclick="closeWizardModal(event)">Cancelar</button>
                         <button type="button" class="btn-wizard primary" onclick="nextWizardStep()">Próximo</button>
@@ -1024,10 +1053,11 @@
                     
                     <div class="confirmation-box">
                         <div class="confirmation-item"><span class="label">Fluxo:</span><span class="value" id="conf-type">-</span></div>
-                        <div class="confirmation-item"><span class="label">Valor:</span><span class="value" id="conf-amount" style="color: var(--expense);">-</span></div>
+                        <div class="confirmation-item"><span class="label" id="conf-amount-label">Valor:</span><span class="value" id="conf-amount" style="color: var(--expense);">-</span></div>
+                        <div class="confirmation-item" id="conf-installment-row" style="display: none;"><span class="label">Parcelamento:</span><span class="value" id="conf-installment" style="color: var(--installment);">-</span></div>
                         <div class="confirmation-item"><span class="label">Identificação:</span><span class="value" id="conf-desc">-</span></div>
                         <div class="confirmation-item" id="conf-cat-row"><span class="label">Categoria:</span><span class="value" id="conf-cat">-</span></div>
-                        <div class="confirmation-item"><span class="label">Data:</span><span class="value" id="conf-date">-</span></div>
+                        <div class="confirmation-item"><span class="label">Data Inicial:</span><span class="value" id="conf-date">-</span></div>
                     </div>
 
                     <div class="wizard-actions">
@@ -1039,19 +1069,16 @@
             </form>
         </div>
     </div>
-    <!-- TRIO DE BOTÕES FLUTUANTES INFERIORES NATIVOS (FORA DO WIZARD) -->
-    
-    <!-- 1. Botão Sync (Esquerda) -->
+
+    <!-- TRIO DE BOTÕES FLUTUANTES INFERIORES -->
     <button class="sync-icon-btn" id="menu-toggle-btn" onclick="toggleModal()" title="Sincronizar">
         <svg viewBox="-2.4 -2.4 28.80 28.80" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.6807 14.5869C19.1708 14.5869 22 11.7692 22 8.29344C22 4.81767 19.1708 2 15.6807 2C12.1907 2 9.3615 4.81767 9.3615 8.29344C9.3615 9.90338 10.0963 11.0743 10.0963 11.0743L2.45441 18.6849C2.1115 19.0264 1.63143 19.9143 2.45441 20.7339L3.33616 21.6121C3.67905 21.9048 4.54119 22.3146 5.2466 21.6121L6.27531 20.5876C7.30403 21.6121 8.4797 21.0267 8.92058 20.4412C9.65538 19.4167 8.77362 18.3922 8.77362 18.3922L9.06754 18.0995C10.4783 19.5045 11.7128 18.6849 12.1537 18.0995C12.8885 17.075 12.1537 16.0505 12.1537 16.0505C11.8598 15.465 11.272 15.465 12.0067 14.7333L12.8885 13.8551C13.5939 14.4405 15.0439 14.5869 15.6807 14.5869Z" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"></path><path d="M17.8853 8.29353C17.8853 9.50601 16.8984 10.4889 15.681 10.4889C14.4635 10.4889 13.4766 9.50601 13.4766 8.29353C13.4766 7.08105 14.4635 6.09814 15.681 6.09814C16.8984 6.09814 17.8853 7.08105 17.8853 8.29353Z" stroke="#ffffff" stroke-width="1.5"></path></svg>
     </button>
 
-    <!-- 2. Botão Adicionar (Centro) -->
     <button type="button" id="fab-open-wizard" class="fab-add-btn" onclick="openWizardModal()" title="Nova Transação">
         <svg viewBox="0 0 24 24" width="35" height="35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
     </button>
 
-    <!-- 3. Botão Modo Claro/Escuro (Direita) -->
     <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" onclick="toggleTheme()" title="Mudar Tema">
         <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
     </button>
@@ -1101,53 +1128,54 @@
                             <h3>Saldo</h3>
                             <p id="balance-display">R$ 0,00</p>
                         </div>
+
                         <div class="card income">
                             <h3>Receitas</h3>
                             <p id="income-display">R$ 0,00</p>
                         </div>
                        
-                  <div class="card expense">
-                     <h3>Despesas</h3>
-                          <p id="expense-display">R$ 0,00</p>
-</div>
+                        <div class="card expense">
+                            <h3>Despesas</h3>
+                            <p id="expense-display">R$ 0,00</p>
+                        </div>
 
-<!-- NOVO CARD: CONTADOR DE FECHAMENTO -->
-<div class="card countdown-card">
-    <div class="countdown-header" style="padding: 0 8px">
-        <h3>Tempo Restante</h3>
-        <div class="countdown-settings">
-            <label for="closing-day">DATA:</label>
-            <input type="number" id="closing-day" value="20" min="1" max="31" onchange="updateClosingDay(this.value)" title="Definir dia de fechamento">
-        </div>
-    </div>
-    <div class="countdown-timer">
-        <div class="time-box">
-            <span id="cd-days">00</span>
-            <small>DIAS</small>
-        </div>
-        <span class="colon">:</span>
-        <div class="time-box">
-            <span id="cd-hours">00</span>
-            <small>HORAS</small>
-        </div>
-        <span class="colon">:</span>
-        <div class="time-box">
-            <span id="cd-minutes">00</span>
-            <small>MIN</small>
-        
-        </div>
-    </div>
-</div>
-</div>
+                        <!-- NOVO CARD: COMPRAS PARCELADAS -->
+                        <div class="card installment">
+                            <h3>Compras Parceladas</h3>
+                            <p id="installment-display">R$ 0,00</p>
+                        </div>
 
+                        <!-- CARD: CONTADOR DE FECHAMENTO -->
+                        <div class="card countdown-card">
+                            <div class="countdown-header" style="padding: 0 8px">
+                                <h3>Tempo Restante</h3>
+                                <div class="countdown-settings">
+                                    <label for="closing-day">DATA:</label>
+                                    <input type="number" id="closing-day" value="20" min="1" max="31" onchange="updateClosingDay(this.value)" title="Definir dia de fechamento">
+                                </div>
+                            </div>
+                            <div class="countdown-timer">
+                                <div class="time-box">
+                                    <span id="cd-days">00</span>
+                                    <small>DIAS</small>
+                                </div>
+                                <span class="colon">:</span>
+                                <div class="time-box">
+                                    <span id="cd-hours">00</span>
+                                    <small>HORAS</small>
+                                </div>
+                                <span class="colon">:</span>
+                                <div class="time-box">
+                                    <span id="cd-minutes">00</span>
+                                    <small>MIN</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
+                </div>
             </div>
 
             <!-- PÁGINA 2: HISTÓRICO DE TRANSAÇÕES -->
-            <button type="button" id="fab-open-wizard" class="fab-add-btn" onclick="openWizardModal()" title="Nova Transação">
-        <svg viewBox="0 0 24 24" width="35" height="35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-    </button>
             <div class="app-page">
                 <div class="container history-wrapper">
                     
@@ -1190,7 +1218,7 @@
                     </div>
                 </div>
             </div>
-</div>
+
         </div>
     </div>
 
@@ -1230,12 +1258,16 @@
         const descriptionInput = document.getElementById('description');
         const dateInput = document.getElementById('date');
         const amountInput = document.getElementById('amount');
+        const installmentsInput = document.getElementById('installments');
+        const installmentRow = document.getElementById('installment-row');
+        const installmentPreview = document.getElementById('installment-preview');
         const typeInput = document.getElementById('type');
         const categoryInput = document.getElementById('category');
         const transactionList = document.getElementById('transaction-list');
         const balanceDisplay = document.getElementById('balance-display');
         const incomeDisplay = document.getElementById('income-display');
         const expenseDisplay = document.getElementById('expense-display');
+        const installmentDisplay = document.getElementById('installment-display');
         const syncKeyInput = document.getElementById('sync-key');
         const syncStatus = document.getElementById('sync-status');
         const modal = document.getElementById('sync-modal');
@@ -1256,64 +1288,97 @@
         }
         
         /* --- LÓGICA DO CONTADOR DE FECHAMENTO --- */
-let closingDay = localStorage.getItem('closing_day') || 20;
-document.getElementById('closing-day').value = closingDay;
+        let closingDay = localStorage.getItem('closing_day') || 20;
+        document.getElementById('closing-day').value = closingDay;
 
-function updateClosingDay(val) {
-    let day = parseInt(val);
-    if(day >= 1 && day <= 31) {
-        closingDay = day;
-        localStorage.setItem('closing_day', closingDay);
-        calculateCountdown(); // Atualiza na mesma hora
-    } else {
-        // Volta para o último valor válido se o usuário digitar algo estranho
-        document.getElementById('closing-day').value = closingDay; 
-    }
-}
+        function updateClosingDay(val) {
+            let day = parseInt(val);
+            if(day >= 1 && day <= 31) {
+                closingDay = day;
+                localStorage.setItem('closing_day', closingDay);
+                calculateCountdown();
+            } else {
+                document.getElementById('closing-day').value = closingDay; 
+            }
+        }
 
-function calculateCountdown() {
-    const now = new Date();
-    // Cria a data alvo para o dia de fechamento definido
-    let target = new Date(now.getFullYear(), now.getMonth(), closingDay);
-    target.setHours(23, 59, 59);
+        function calculateCountdown() {
+            const now = new Date();
+            let target = new Date(now.getFullYear(), now.getMonth(), closingDay);
+            target.setHours(23, 59, 59);
 
-    // Se hoje já passou do dia estipulado (ex: hoje é dia 22 e fecha dia 20)
-    // O alvo vira o dia de fechamento do próximo mês
-    if (now.getDate() > closingDay) {
-        target.setMonth(target.getMonth() + 1);
-    }
+            if (now.getDate() > closingDay) {
+                target.setMonth(target.getMonth() + 1);
+            }
 
-    const diff = target - now;
+            const diff = target - now;
 
-    if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / 1000 / 60) % 60);
-        
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / 1000 / 60) % 60);
 
-        document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-        document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
-        
-    } else {
-        // Previne bugar se cair no exato milissegundo zero
-        document.getElementById('cd-days').textContent = "00";
-        document.getElementById('cd-hours').textContent = "00";
-        document.getElementById('cd-minutes').textContent = "00";
-        
-    }
-}
+                document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+            } else {
+                document.getElementById('cd-days').textContent = "00";
+                document.getElementById('cd-hours').textContent = "00";
+                document.getElementById('cd-minutes').textContent = "00";
+            }
+        }
 
-// Atualiza o contador a cada 1 segundo (1000ms)
-setInterval(calculateCountdown, 1000);
-calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de aparecer
+        setInterval(calculateCountdown, 1000);
+        calculateCountdown();
 
+        /* --- CÁLCULO MENSAL DE COMPRAS PARCELADAS --- */
+        function getInstallmentInfo(t, refDate = new Date()) {
+            const totalInstallments = parseInt(t.installments, 10) || 1;
+            const totalAmount = parseFloat(t.totalAmount || (t.amount * totalInstallments)) || 0;
+            const installmentAmount = parseFloat(t.amount) || (totalAmount / totalInstallments);
+
+            if (!t.date) {
+                return { active: true, currentInstallment: 1, totalInstallments, installmentAmount, totalAmount };
+            }
+
+            const parts = t.date.split('-');
+            const startYear = parseInt(parts[0], 10);
+            const startMonth = parseInt(parts[1], 10) - 1;
+
+            const currentYear = refDate.getFullYear();
+            const currentMonth = refDate.getMonth();
+
+            const monthsDiff = (currentYear - startYear) * 12 + (currentMonth - startMonth);
+            const currentInstallment = monthsDiff + 1;
+
+            const active = currentInstallment >= 1 && currentInstallment <= totalInstallments;
+
+            return {
+                active,
+                currentInstallment,
+                totalInstallments,
+                installmentAmount,
+                totalAmount
+            };
+        }
+
+        function updateInstallmentPreview() {
+            const total = parseFloat(amountInput.value) || 0;
+            const count = parseInt(installmentsInput.value, 10) || 0;
+            if (total > 0 && count > 0) {
+                const parcelValue = total / count;
+                installmentPreview.textContent = `${count}x de ${parcelValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            } else {
+                installmentPreview.textContent = '0x de R$ 0,00';
+            }
+        }
 
         function openWizardModal() {
             if (!editingTransactionId) {
                 form.reset();
                 handleTypeChange();
                 setDefaultDate();
+                updateInstallmentPreview();
             }
             currentWizardStep = 1;
             updateWizardUI();
@@ -1342,13 +1407,37 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
             }
 
             if (currentWizardStep === 4) {
-                const isIncome = typeInput.value === 'income';
-                document.getElementById('conf-type').textContent = isIncome ? 'Receita' : 'Despesa';
+                const typeVal = typeInput.value;
+                const isIncome = typeVal === 'income';
+                const isInstallment = typeVal === 'installment';
+
+                const typeMap = {
+                    'income': 'Receita',
+                    'expense': 'Despesa',
+                    'installment': 'Compra Parcelada'
+                };
+                document.getElementById('conf-type').textContent = typeMap[typeVal] || 'Despesa';
                 
-                const displayAmt = parseFloat(amountInput.value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                const rawAmount = parseFloat(amountInput.value || 0);
+                const displayAmt = rawAmount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 const amtEl = document.getElementById('conf-amount');
+                const amtLabel = document.getElementById('conf-amount-label');
+                const instRow = document.getElementById('conf-installment-row');
+                const instValEl = document.getElementById('conf-installment');
+
                 amtEl.textContent = displayAmt;
-                amtEl.style.color = isIncome ? 'var(--income)' : 'var(--expense)';
+                amtEl.style.color = isIncome ? 'var(--income)' : (isInstallment ? 'var(--installment)' : 'var(--expense)');
+
+                if (isInstallment) {
+                    amtLabel.textContent = 'Valor Total:';
+                    const count = parseInt(installmentsInput.value, 10) || 1;
+                    const parcelAmt = (rawAmount / count).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    instRow.style.display = 'flex';
+                    instValEl.textContent = `${count}x de ${parcelAmt}`;
+                } else {
+                    amtLabel.textContent = 'Valor:';
+                    instRow.style.display = 'none';
+                }
                 
                 document.getElementById('conf-desc').textContent = descriptionInput.value || '-';
                 
@@ -1368,11 +1457,19 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
                 }
             }
         }
+
         function nextWizardStep() {
             if (currentWizardStep === 1) {
                 if (!amountInput.value || parseFloat(amountInput.value) <= 0) {
                     amountInput.focus();
                     return;
+                }
+                if (typeInput.value === 'installment') {
+                    const instCount = parseInt(installmentsInput.value, 10);
+                    if (!instCount || instCount < 1) {
+                        installmentsInput.focus();
+                        return;
+                    }
                 }
                 currentWizardStep = 2;
             } else if (currentWizardStep === 2) {
@@ -1504,8 +1601,18 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
                     categoryInput.appendChild(opt);
                 });
             }
+
+            if (type === 'installment') {
+                installmentRow.style.display = 'flex';
+                amountInput.placeholder = 'Valor Total (R$)';
+            } else {
+                installmentRow.style.display = 'none';
+                amountInput.placeholder = 'Valor (R$)';
+            }
+
             updateFormTypeLabel();
             updateFormCategoryLabel();
+            updateInstallmentPreview();
             updateWizardUI();
         }
         
@@ -1563,7 +1670,7 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
             transactions.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
             const filteredTransactions = transactions.filter(t => {
-                const matchesDesc = t.description.toLowerCase().includes(filterDescValue);
+                const matchesDesc = (t.description || '').toLowerCase().includes(filterDescValue);
                 const matchesCat = !filterCatValue || t.category === filterCatValue;
                 const matchesDate = !filterDateValue || t.date === filterDateValue;
                 return matchesDesc && matchesCat && matchesDate;
@@ -1591,8 +1698,12 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
                 return;
             }
 
+            const now = new Date();
+
             filtered.forEach(t => {
                 const isIncome = t.type === 'income';
+                const isInstallment = t.type === 'installment';
+
                 let dayStr = "00";
                 let monthStr = "---";
                 if (t.date) {
@@ -1607,13 +1718,27 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
                 const visualCategory = isIncome ? "Receita" : t.category;
                 const meta = categoryMetadata[visualCategory] || { icon: "📦", bg: "#C2C2C2" };
                 
-                const formattedAmount = parseFloat(t.amount).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                let categoryText = visualCategory;
+                let amountToDisplay = parseFloat(t.amount) || 0;
+
+                if (isInstallment) {
+                    const info = getInstallmentInfo(t, now);
+                    amountToDisplay = info.installmentAmount;
+                    const parcelStatus = info.active
+                        ? `Parcela ${info.currentInstallment}/${info.totalInstallments}`
+                        : `Finalizada (${info.totalInstallments}x)`;
+                    categoryText = `${visualCategory} • ${parcelStatus}`;
+                }
+
+                const formattedAmount = amountToDisplay.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 const displayAmount = `${isIncome ? '' : '-'}${formattedAmount}`;
 
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 't-item-card';
-                cardDiv.setAttribute('onclick', `openCardActions('${t.id}', '${t.description.replace(/'/g, "\\'")}')`);
+                cardDiv.setAttribute('onclick', `openCardActions('${t.id}', '${(t.description || '').replace(/'/g, "\\'")}')`);
                 
+                const infoBlockClass = isIncome ? 't-info-block-income' : (isInstallment ? 't-info-block-installment' : '');
+
                 cardDiv.innerHTML = `
                     <div class="t-card-left">
                         <div class="t-status-dot ${t.type}"></div>
@@ -1624,8 +1749,8 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
                         <div class="t-icon-circle" style="background-color: ${meta.bg};">
                             ${meta.icon}
                         </div>
-                        <div class="t-info-block ${isIncome ? 't-info-block-income' : ''}">
-                            <span class="t-meta-category">${visualCategory}</span>
+                        <div class="t-info-block ${infoBlockClass}">
+                            <span class="t-meta-category">${categoryText}</span>
                             <span class="t-main-description">${t.description}</span>
                         </div>
                     </div>
@@ -1640,27 +1765,49 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
         function updateDashboard() {
             let income = 0;
             let expense = 0;
+            let installmentsMonthly = 0;
+            const now = new Date();
 
             transactions.forEach(t => {
-                if (t.type === 'income') income += parseFloat(t.amount);
-                else expense += parseFloat(t.amount);
+                if (t.type === 'income') {
+                    income += parseFloat(t.amount) || 0;
+                } else if (t.type === 'installment') {
+                    const info = getInstallmentInfo(t, now);
+                    if (info.active) {
+                        installmentsMonthly += info.installmentAmount;
+                    }
+                } else {
+                    expense += parseFloat(t.amount) || 0;
+                }
             });
 
-            const balance = income - expense;
+            const balance = income - expense - installmentsMonthly;
 
-            balanceDisplay.textContent = `R$ ${balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-            incomeDisplay.textContent = `R$ ${income.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-            expenseDisplay.textContent = `R$ ${expense.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            balanceDisplay.textContent = `R$ ${balance.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            incomeDisplay.textContent = `R$ ${income.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            expenseDisplay.textContent = `R$ ${expense.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            installmentDisplay.textContent = `R$ ${installmentsMonthly.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         }
 
         function saveWizardTransaction() {
-            const data = {
+            const typeVal = typeInput.value;
+            const rawAmount = parseFloat(amountInput.value) || 0;
+
+            let data = {
                 description: descriptionInput.value,
                 date: dateInput.value,
-                amount: parseFloat(amountInput.value),
-                type: typeInput.value,
-                category: typeInput.value === 'income' ? 'Receita' : categoryInput.value
+                amount: rawAmount,
+                type: typeVal,
+                category: typeVal === 'income' ? 'Receita' : categoryInput.value
             };
+
+            if (typeVal === 'installment') {
+                const count = parseInt(installmentsInput.value, 10) || 1;
+                const parcelValue = parseFloat((rawAmount / count).toFixed(2));
+                data.totalAmount = rawAmount;
+                data.installments = count;
+                data.amount = parcelValue;
+            }
 
             if (editingTransactionId) {
                 if (currentRef) {
@@ -1692,12 +1839,20 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
 
             editingTransactionId = id;
 
+            typeInput.value = t.type;
+            handleTypeChange();
+
             descriptionInput.value = t.description;
             dateInput.value = t.date || '';
-            amountInput.value = t.amount;
-            typeInput.value = t.type;
+
+            if (t.type === 'installment') {
+                amountInput.value = t.totalAmount || (t.amount * (t.installments || 1));
+                installmentsInput.value = t.installments || 2;
+                updateInstallmentPreview();
+            } else {
+                amountInput.value = t.amount;
+            }
             
-            handleTypeChange();
             if (t.type !== 'income') {
                 categoryInput.value = t.category;
             }
@@ -1719,7 +1874,6 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
                 init();
             }
         }
-
         function clearAllHistory() {
             if (!confirm("AVISO: Isso apagará TODO o seu histórico de transações. Continuar?")) return;
             if (currentRef) {
@@ -1747,41 +1901,33 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
         const sunSVG = `<svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.22" x2="5.64" y2="17.78"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
         const moonSVG = `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
-        // FUNÇÃO PARA ALTERNAR O TEMA
         function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    document.getElementById('theme-toggle-btn').innerHTML = isDark ? sunSVG : moonSVG;
-
-    // 👇 ALTERA O THEME-COLOR DINAMICAMENTE 👇
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-        // Altera para #121212 no modo escuro e volta para #014a4d no modo claro
-        metaThemeColor.setAttribute('content', isDark ? '#001820' : '#014a4d');
-    }
-}
-
-         // VERIFICAÇÃO DE TEMA AO INICIAR O APP
-(function() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('theme-toggle-btn').innerHTML = sunSVG;
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
             
-            // 👇 GARANTE A COR CORRETA AO CARREGAR A PÁGINA 👇
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('theme-toggle-btn').innerHTML = isDark ? sunSVG : moonSVG;
+
             const metaThemeColor = document.querySelector('meta[name="theme-color"]');
             if (metaThemeColor) {
-                metaThemeColor.setAttribute('content', '#001820');
+                metaThemeColor.setAttribute('content', isDark ? '#001820' : '#014a4d');
             }
-        });
-    }
-})();
+        }
 
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                window.addEventListener('DOMContentLoaded', () => {
+                    document.getElementById('theme-toggle-btn').innerHTML = sunSVG;
+                    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+                    if (metaThemeColor) {
+                        metaThemeColor.setAttribute('content', '#001820');
+                    }
+                });
+            }
+        })();
 
-        // CONTROLADOR DE SCROLL ATUALIZADO (Esconde os 3 botões no Histórico de forma unificada)
         document.getElementById('app-viewport').addEventListener('scroll', function(e) {
             const scrollLeft = e.target.scrollLeft;
             const viewWidth = e.target.clientWidth;
@@ -1792,15 +1938,13 @@ calculateCountdown(); // Chamada inicial para não esperar 1 segundo antes de ap
             if (scrollLeft > viewWidth / 2) {
                 syncBtn.style.opacity = '0';
                 syncBtn.style.pointerEvents = 'none';
-                fabBtn.style.opacity = '0';
-                fabBtn.style.pointerEvents = 'none';
+                
                 themeBtn.style.opacity = '0';
                 themeBtn.style.pointerEvents = 'none';
             } else {
                 syncBtn.style.opacity = '1';
                 syncBtn.style.pointerEvents = 'auto';
-                fabBtn.style.opacity = '1';
-                fabBtn.style.pointerEvents = 'auto';
+                
                 themeBtn.style.opacity = '1';
                 themeBtn.style.pointerEvents = 'auto';
             }
