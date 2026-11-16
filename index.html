@@ -1297,6 +1297,7 @@
                 closingDay = day;
                 localStorage.setItem('closing_day', closingDay);
                 calculateCountdown();
+                init();
             } else {
                 document.getElementById('closing-day').value = closingDay; 
             }
@@ -1781,7 +1782,7 @@
                 }
             });
 
-            const balance = income - expense - installmentsMonthly;
+            const balance = income - expense;
 
             balanceDisplay.textContent = `R$ ${balance.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             incomeDisplay.textContent = `R$ ${income.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -1875,11 +1876,25 @@
             }
         }
         function clearAllHistory() {
-            if (!confirm("AVISO: Isso apagará TODO o seu histórico de transações. Continuar?")) return;
+            if (!confirm("AVISO: Isso apagará as receitas e despesas do histórico, mantendo apenas as Compras Parceladas em andamento. Continuar?")) return;
+            
+            const now = new Date();
+
             if (currentRef) {
-                currentRef.remove();
+                transactions.forEach(t => {
+                    const info = t.type === 'installment' ? getInstallmentInfo(t, now) : null;
+                    const manterParcela = info && info.currentInstallment <= info.totalInstallments;
+                    
+                    if (!manterParcela) {
+                        currentRef.child(t.id).remove();
+                    }
+                });
             } else {
-                transactions = [];
+                transactions = transactions.filter(t => {
+                    if (t.type !== 'installment') return false;
+                    const info = getInstallmentInfo(t, now);
+                    return info.currentInstallment <= info.totalInstallments;
+                });
                 init();
             }
         }
