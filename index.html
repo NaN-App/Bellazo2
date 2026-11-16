@@ -1297,7 +1297,7 @@
                 closingDay = day;
                 localStorage.setItem('closing_day', closingDay);
                 calculateCountdown();
-                init();
+                ini();
             } else {
                 document.getElementById('closing-day').value = closingDay; 
             }
@@ -1342,12 +1342,27 @@
                 return { active: true, currentInstallment: 1, totalInstallments, installmentAmount, totalAmount };
             }
 
+                        const fecharDia = parseInt(closingDay, 10) || 20;
+
             const parts = t.date.split('-');
             const startYear = parseInt(parts[0], 10);
-            const startMonth = parseInt(parts[1], 10) - 1;
+            let startMonth = parseInt(parts[1], 10) - 1;
+            const startDay = parseInt(parts[2], 10);
+
+            // Se comprou após o dia de fechamento (ex: dia 21 a 31), a 1ª parcela vai para o mês seguinte
+            if (startDay > fecharDia) {
+                startMonth += 1;
+            }
 
             const currentYear = refDate.getFullYear();
-            const currentMonth = refDate.getMonth();
+            let currentMonth = refDate.getMonth();
+            const currentDay = refDate.getDate();
+
+            // Opcional: se hoje já passou do dia 20, o painel já exibe o ciclo da fatura do mês seguinte
+            if (currentDay > fecharDia) {
+                currentMonth += 1;
+            }
+
 
             const monthsDiff = (currentYear - startYear) * 12 + (currentMonth - startMonth);
             const currentInstallment = monthsDiff + 1;
