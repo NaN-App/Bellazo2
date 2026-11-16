@@ -1195,7 +1195,7 @@
                             </div>
                             
                             <div class="date-filter-wrapper">
-                                <span id="filter-cat-label" class="date-label placeholder">Categoria</span>
+                                <span id="filter-cat-label" class="date-label placeholder">Filtro</span>
                                 <span class="date-arrow">▼</span>
                                 <select id="filter-cat" onchange="updateFilterCatLabel(this)">
                                     <option value="">Categoria</option>
@@ -1635,9 +1635,9 @@
         function populateCategoryFilter() {
             const filterCat = document.getElementById('filter-cat');
             const currentSelection = filterCat.value;
-            filterCat.innerHTML = '<option value="">Categoria</option>';
+            filterCat.innerHTML = '<option value="">Todos</option>';
             
-            const allCategories = [...new Set([...expenseCategories, "Receita"])];
+            const allCategories = [...new Set(["Compras Parceladas", "Receita", ...expenseCategories])];
             allCategories.forEach(cat => {
                 const opt = document.createElement('option');
                 opt.value = cat;
@@ -1687,7 +1687,8 @@
 
             const filteredTransactions = transactions.filter(t => {
                 const matchesDesc = (t.description || '').toLowerCase().includes(filterDescValue);
-                const matchesCat = !filterCatValue || t.category === filterCatValue;
+                const matchesCat = !filterCatValue || 
+                    (filterCatValue === 'Compras Parceladas' ? t.type === 'installment' : t.category === filterCatValue);
                 const matchesDate = !filterDateValue || t.date === filterDateValue;
                 return matchesDesc && matchesCat && matchesDate;
             });
