@@ -1188,9 +1188,9 @@
                         <div class="filters-container">
                             <input type="text" id="filter-desc" placeholder="Pesquisar" oninput="init()">
                             
-                            <div class="date-filter-wrapper">
+                                                        <div class="date-filter-wrapper">
                                 <span id="filter-date-label" class="date-label placeholder">Data</span>
-                                <span class="date-arrow">▼</span>
+                                <span class="date-arrow" id="filter-date-clear" onclick="clearFilterDate(event)" style="position: relative; z-index: 5; padding: 10px; cursor: pointer;">▼</span>
                                 <input type="date" id="filter-date" onchange="updateFilterDateLabel(this)">
                             </div>
                             
@@ -1297,7 +1297,7 @@
                 closingDay = day;
                 localStorage.setItem('closing_day', closingDay);
                 calculateCountdown();
-                ini();
+                init();
             } else {
                 document.getElementById('closing-day').value = closingDay; 
             }
@@ -1540,18 +1540,37 @@
             updateFormDateLabel(dateInput);
         }
 
+             function clearFilterDate(e) {
+            const dateInput = document.getElementById('filter-date');
+            if (dateInput.value) {
+                e.preventDefault();
+                dateInput.value = '';
+                updateFilterDateLabel(dateInput);
+            } else {
+                // Se estiver vazio (seta para baixo), aciona o calendário nativo do celular
+                try {
+                    dateInput.showPicker();
+                } catch (err) {}
+            }
+        }
+
+
         function updateFilterDateLabel(input) {
             const label = document.getElementById('filter-date-label');
+            const clearBtn = document.getElementById('filter-date-clear');
             if (input.value) {
                 const parts = input.value.split('-');
                 label.textContent = `${parts[2]}/${parts[1]}`;
                 label.classList.remove('placeholder');
+                clearBtn.textContent = '✕';
             } else {
                 label.textContent = 'Data';
                 label.classList.add('placeholder');
+                clearBtn.textContent = '▼';
             }
             init();
         }
+
 
         function updateFilterCatLabel(select) {
             const label = document.getElementById('filter-cat-label');
@@ -1685,13 +1704,27 @@
 
             transactions.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-            const filteredTransactions = transactions.filter(t => {
+                        const filteredTransactions = transactions.filter(t => {
                 const matchesDesc = (t.description || '').toLowerCase().includes(filterDescValue);
                 const matchesCat = !filterCatValue || 
                     (filterCatValue === 'Compras Parceladas' ? t.type === 'installment' : t.category === filterCatValue);
-                const matchesDate = !filterDateValue || t.date === filterDateValue;
+                
+                let matchesDate = false;
+                if (!filterDateValue) {
+                    matchesDate = true;
+                } else if (t.type === 'installment' && t.date) {
+                    // Exibe todas as compras parceladas ativas no mês selecionado, ignorando o dia específico
+                    const [fYear, fMonth, fDay] = filterDateValue.split('-');
+                    const filterDateObj = new Date(fYear, fMonth - 1, fDay);
+                    const info = getInstallmentInfo(t, filterDateObj);
+                    matchesDate = info.active;
+                } else {
+                    matchesDate = t.date === filterDateValue;
+                }
+
                 return matchesDesc && matchesCat && matchesDate;
             });
+
 
             if (filterCatValue || filterDateValue || filterDescValue) {
                 const totalFiltered = filteredTransactions.reduce((acc, curr) => {
@@ -1707,7 +1740,7 @@
             updateDashboard();
         }
 
-        function renderCards(filtered) {
+                function renderCards(filtered) {
             transactionList.innerHTML = '';
             
             if(filtered.length === 0) {
@@ -1715,9 +1748,16 @@
                 return;
             }
 
-            const now = new Date();
+            // Descobre se estamos olhando para hoje ou para uma data filtrada
+            const filterDateValue = document.getElementById('filter-date').value;
+            let refDate = new Date();
+            if (filterDateValue) {
+                const [y, m, d] = filterDateValue.split('-');
+                refDate = new Date(y, m - 1, d);
+            }
 
             filtered.forEach(t => {
+
                 const isIncome = t.type === 'income';
                 const isInstallment = t.type === 'installment';
 
@@ -1739,7 +1779,7 @@
                 let amountToDisplay = parseFloat(t.amount) || 0;
 
                 if (isInstallment) {
-                    const info = getInstallmentInfo(t, now);
+                    const info = getInstallmentInfo(t, refDate);
                     amountToDisplay = info.installmentAmount;
                     const parcelStatus = info.active
                         ? `Parcela ${info.currentInstallment}/${info.totalInstallments}`
